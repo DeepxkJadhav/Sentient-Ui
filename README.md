@@ -70,14 +70,21 @@ VITE_GEMINI_KEY=your_gemini_api_key_here\
 npm run dev
 
 🛠️ Tech Stack
-Frontend: React + Vite
+Frontend: React + Vite 
+
 Styling: Tailwind CSS
+
 AI: Google Gemini API
+
 Build Tool: Vite
+
 State: Zustand (optional)
+
 Automation: Playwright (planned)
+
 📄 License
 MIT © DeepxkJadhav
+
 <p align="center">
 <i>Made with 💡 and a touch of gold.</i>
 </p>
