@@ -1,0 +1,314 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg-base:     #0d0d0f;
+  --bg-surface:  #131316;
+  --bg-elevated: #1a1a1e;
+  --bg-hover:    #1f1f24;
+
+  --border:      #252529;
+  --border-mid:  #2e2e34;
+
+  --text-primary:   #e8e8ed;
+  --text-secondary: #8a8a96;
+  --text-muted:     #46464f;
+
+  --accent:         #6366f1;   /* indigo — single restrained accent */
+  --accent-dim:     #4f52d4;
+  --accent-subtle:  rgba(99, 102, 241, 0.08);
+
+  --green:  #34d399;
+  --red:    #f87171;
+  --amber:  #fbbf24;
+  --blue:   #60a5fa;
+  --purple: #a78bfa;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --radius-sm: 4px;
+  --radius:    6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --transition: 140ms ease;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar          { width: 4px; height: 4px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: var(--border-mid); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a44; }
+
+/* ── Tailwind theme tokens ─────────────────────────────────── */
+@theme {
+  --color-background: #0d0d0f;
+  --color-foreground: #e8e8ed;
+  --color-surface:    #131316;
+  --color-elevated:   #1a1a1e;
+  --color-border:     #252529;
+  --color-accent:     #6366f1;
+  --color-muted:      #8a8a96;
+  --font-mono:        "JetBrains Mono", monospace;
+}
+
+/* ── Layout primitives ─────────────────────────────────────── */
+.page-container {
+  padding: 28px 32px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* ── Surface / card ────────────────────────────────────────── */
+.surface {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition);
+}
+
+.card:hover {
+  border-color: var(--border-mid);
+}
+
+.card.selected {
+  border-color: var(--accent);
+}
+
+/* ── Status dots ───────────────────────────────────────────── */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-idle      { background: var(--text-muted); }
+.status-thinking  { background: var(--blue); }
+.status-executing { background: var(--green); }
+.status-error     { background: var(--red); }
+.status-offline   { background: var(--text-muted); opacity: 0.4; }
+.status-online    { background: var(--green); }
+.status-degraded  { background: var(--amber); }
+
+/* ── Sidebar ───────────────────────────────────────────────── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition), background var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sidebar-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.sidebar-item.active {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-dim);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-mid);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-mid);
+}
+
+/* ── Input ─────────────────────────────────────────────────── */
+.sentient-input {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.sentient-input:focus {
+  border-color: var(--accent);
+}
+
+.sentient-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Badge ─────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-accent  { background: var(--accent-subtle); color: var(--accent); }
+.badge-green   { background: rgba(52,211,153,.1);  color: var(--green); }
+.badge-red     { background: rgba(248,113,113,.1); color: var(--red); }
+.badge-amber   { background: rgba(251,191,36,.1);  color: var(--amber); }
+.badge-blue    { background: rgba(96,165,250,.1);  color: var(--blue); }
+.badge-muted   { background: var(--bg-hover);      color: var(--text-muted); }
+/* legacy aliases used by existing pages */
+.badge-gold   { background: rgba(251,191,36,.1);   color: var(--amber); }
+.badge-cyan   { background: rgba(96,165,250,.1);   color: var(--blue); }
+.badge-purple { background: rgba(167,139,250,.1);  color: var(--purple); }
+.badge-orange { background: rgba(251,191,36,.1);   color: var(--amber); }
+
+/* ── Progress bar ──────────────────────────────────────────── */
+.progress-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ── Metric card ───────────────────────────────────────────── */
+.metric-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+/* ── Agent card (alias → card) ─────────────────────────────── */
+.agent-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition), background var(--transition);
+  cursor: pointer;
+}
+
+.agent-card:hover {
+  border-color: var(--border-mid);
+  background: var(--bg-hover);
+}
+
+.agent-card.gold-border {
+  border-color: var(--accent);
+}
+
+/* ── Swarm graph container ─────────────────────────────────── */
+.swarm-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Section label ─────────────────────────────────────────── */
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Legacy alias */
+.section-header {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* ── Mono text ─────────────────────────────────────────────── */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* ── D3 swarm ──────────────────────────────────────────────── */
+.node circle { cursor: pointer; transition: r 0.2s ease; }
+.node text   { font-family: var(--font-mono); font-size: 10px; fill: var(--text-secondary); }
+.link        { stroke-opacity: 0.3; }
+.link:hover  { stroke-opacity: 0.8; }
+
+/* ── Divider ───────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+}

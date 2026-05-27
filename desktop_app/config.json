@@ -1,0 +1,19 @@
+{
+  "api_keys": {
+    "openai": "",
+    "anthropic": "",
+    "gemini": ""
+  },
+  "plugins": {
+    "google_mail": false,
+    "calendar": false,
+    "github": false,
+    "slack": false
+  },
+  "ui_preferences": {
+    "theme_mode": "Light",
+    "primary_color": "#D4AF37",
+    "font_size": 14,
+    "layout_style": "minimal"
+  }
+}
